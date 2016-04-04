@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+void main()
+{
+        FILE *fp;
+        double stu_ID,ID;
+        char stu_name[10],name[5][10];
+        int stu_math,stu_chi,stu_eng,i;
+        int score_all,score_ave;
+        int math,chi,eng,all,ave;
+        if((fp=fopen("实验三_2.dat","w"))==NULL)
+        {
+                printf("无法打开此文件\n");
+                exit(0);
+        }
+        printf("请输入学生信息:\n");
+        printf("学号      姓名      数学成绩  语文成绩  英语成绩\n");
+        for(i=0;i<5;i++)
+        {
+
+                scanf("%lf%s%d%d%d",&stu_ID,stu_name,&stu_math,&stu_chi,&stu_eng);
+                fprintf(fp,"%.0lf      %s      %d       %d      %d\n",stu_ID,stu_name,stu_math,stu_chi,stu_eng);
+                fprintf(fp,"\n");
+        }
+        fclose(fp);
+        rewind(fp);
+        if((fp=fopen("实验三_2.dat","r"))==NULL)
+        {
+                printf("无法打开此文件\n");
+                exit(0);
+        }
+        printf("\n\n\n********************************************\n");
+        for(i=0;i<5;i++)
+        {
+                fscanf(fp,"%lf       %s       %d      %d      %d",&ID,name[10],&math,&chi,&eng);
+                printf("%.0lf      %s        %d      %d      %d     %d    %d\n",ID,name[10],math,chi,eng,math+chi+eng,(math+chi+eng)/3);
+        }
+        fclose(fp);
+}
